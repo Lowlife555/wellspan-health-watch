@@ -60,6 +60,25 @@ firmware/
 - `firmware/oled-versions/` intentionally keeps several near-duplicate snapshots: they document how the UI and the sensor pipeline evolved, and several later ones are nested copies of the previous stage.
 - The Bluetooth host-side tool that pairs with the watch is not part of this repository.
 
+## Team and attribution
+
+A two-person team project (EL2205, October 2025 – April 2026). **With thanks to Mo Yan, the project's hardware lead.**
+
+| Role | Who | Content |
+|---|---|---|
+| **Software and algorithms** | **Ni Youjia** | Four-layer embedded software architecture with time-slice polling; sensor bring-up and driver debugging (MPU6050, MAX30102, DHT11, ILI9341 TFT, XPT2046 touch controller, HC-05); attitude-angle solving, step counting, fall detection, PPG DC removal and filtering, heart-rate and SpO₂ computation; the Python PC host GUI. |
+| **Hardware** | **Mo Yan** | Two-board architecture (main board + 2.8″ SPI TFT touch board); component selection, schematics and PCB layout, Gerber production files, hardware bring-up and testing, pin/bus allocation and the 3D-printed enclosure. |
+| Joint | both | System integration, functional testing and the English technical report. |
+
+### Selected implementation and results
+
+- **Sensor scheduling** at three periods inside the polling loop: 8 ms (MAX30102), 100 ms (MPU6050), 2000 ms (DHT11).
+- **PPG chain:** IIR DC removal (α = 0.95) → low-pass filter (α = 0.7) → 500 ms refractory peak detection → 5-point moving average for heart rate.
+- **SpO₂** from the Lambert–Beer ratio *R*; **attitude angles** solved with `atan2`; step counting and fall detection by threshold.
+- Benchmarked against 20 laboratory samples and a Samsung Galaxy Watch4 Classic reference: heart-rate error down to **±5 bpm**, SpO₂ error down to **±2%**, fall false-alarm rate **< 5 %** with alarm response **< 500 ms**.
+- PPG waveform and peak detection cross-checked in MATLAB; the Python host displays six parameters live over HC-05 and exports a TXT log.
+- Deliverables: two schematics, PCB layouts, Gerber files, an English technical report, a defence presentation and a full functional demo.
+
 ---
 
 # WellSpan —— 可穿戴健康监测系统
@@ -123,3 +142,22 @@ firmware/
 - 编译产物（`Objects/`、`Listings/`、`DebugConfig/`）、厂商 HAL/CMSIS 目录树以及课程报告/答辩 PPT **有意未入库**，见 `.gitignore`。
 - `firmware/oled-versions/` 里刻意保留了几份近乎重复的快照：它们记录了 UI 与传感器数据链路的演进过程，后面几份是前一阶段的嵌套副本。
 - 与手表配对的上位机工具不在本仓库内。
+
+## 团队与分工
+
+两人团队项目（EL2205，2025 年 10 月 – 2026 年 4 月）。**特别感谢莫妍（Mo Yan）—— 本项目的硬件负责人。**
+
+| 分工 | 谁 | 内容 |
+|---|---|---|
+| **软件与算法** | **Ni Youjia** | 四层嵌入式软件架构 + 时间片轮询调度；传感器调试与驱动（MPU6050、MAX30102、DHT11、ILI9341 TFT、XPT2046 触摸控制器、HC-05）；姿态角解算、计步、跌倒检测、PPG 直流去除与滤波、心率与血氧计算；Python 上位机界面。 |
+| **硬件** | **莫妍（Mo Yan）** | 双板架构（主控板 + 2.8 英寸 SPI TFT 触摸扩展板）；器件选型、原理图与 PCB 布局布线、Gerber 生产文件、硬件联调与测试、总线/引脚分配、3D 打印外壳结构设计。 |
+| 共同完成 | 两人 | 系统联调、功能测试与英文技术报告。 |
+
+### 关键实现与实测结果
+
+- **传感器调度**：轮询循环里三档周期 —— 8 ms（MAX30102）、100 ms（MPU6050）、2000 ms（DHT11）。
+- **PPG 信号链**：IIR 去直流（α = 0.95）→ 低通滤波（α = 0.7）→ 500 ms 防重复峰检测 → 5 点滑动平均得心率。
+- **血氧**由朗伯–比尔定律的比值 *R* 求得；**姿态角**用 `atan2` 解算；计步与跌倒用阈值判定。
+- 以 20 组实验室样本、对标 Samsung Galaxy Watch4 Classic 实测：心率误差低至 **±5 bpm**、血氧误差低至 **±2%**，跌倒误报率 **< 5%**、报警响应 **< 500 ms**。
+- 用 MATLAB 交叉验证 PPG 波形与峰检测；Python 上位机经 HC-05 实时显示六项参数并导出 TXT 日志。
+- 交付物：2 份原理图、PCB 版图、Gerber 生产文件、英文技术报告、答辩 PPT 与全功能演示。
