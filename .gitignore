@@ -1,0 +1,47 @@
+# ---- build outputs ----
+**/Objects/
+**/Listings/
+**/DebugConfig/
+**/RTE/
+**/Debug/
+**/Release/
+**/db/
+**/incremental_db/
+**/output_files/
+**/greybox_tmp/
+**/.vs/
+*.o
+*.d
+*.crf
+*.dep
+*.lnp
+*.iex
+*.sct
+*.map
+*.htm
+*.axf
+*.hex
+*.bin
+*.elf
+*.uvguix.*
+*.scvd
+
+# ---- vendor / generated (regenerate via STM32CubeMX from the .ioc) ----
+Drivers/
+Middlewares/
+
+# ---- archives / big binaries ----
+*.zip
+*.7z
+*.rar
+
+# ---- OS / editor ----
+Thumbs.db
+desktop.ini
+.DS_Store
+# ---- Keil / Quartus generated state and build logs ----
+*.uvoptx
+*.lst
+*.cof
+build*.txt
+
