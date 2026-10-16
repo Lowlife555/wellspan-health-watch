@@ -1,5 +1,9 @@
 # WellSpan — Wearable Health Monitoring System
 
+- **Presentation**: [`docs/EL2205-WellSpan-Presentation-EN.pdf`](docs/EL2205-WellSpan-Presentation-EN.pdf) — 20 slides, the English defence deck
+
+- **Coursework report**: [`docs/EL2205-WellSpan-Report.pdf`](docs/EL2205-WellSpan-Report.pdf) — 37 pages, the submitted EL2205 report (student identifiers redacted)
+
 A battery-powered wearable health-monitoring watch and its host-side link, built as Year-2 undergraduate coursework (EL2205 – Electronic System Application).
 The device continuously acquires **heart rate / blood oxygen**, **body motion**, and **ambient temperature / humidity**, displays them on a menu-driven graphical UI, and streams them wirelessly to a host computer for a carer or clinician.
 
@@ -87,6 +91,10 @@ A two-person team project (EL2205, October 2025 – April 2026). **With thanks t
 - *(From the report, not verifiable in this repository)*: bench comparison against 20 laboratory samples and a Samsung Galaxy Watch4 Classic — heart-rate error down to **±5 bpm**, SpO₂ error down to **±2%**, fall false-alarm rate **< 5 %** with alarm response **< 500 ms**; the PPG waveform and peak detection were cross-checked in MATLAB, and the Python host displays six parameters live over HC-05 and exports a TXT log.
 
 ---
+
+- **课程报告**：[`docs/EL2205-WellSpan-Report.pdf`](docs/EL2205-WellSpan-Report.pdf) —— 提交版 EL2205 报告，37 页（已脱敏个人信息）
+
+- **答辩 PPT**：[`docs/EL2205-WellSpan-Presentation-EN.pdf`](docs/EL2205-WellSpan-Presentation-EN.pdf) —— 英文答辩稿，20 页
 
 # WellSpan —— 可穿戴健康监测系统
 
